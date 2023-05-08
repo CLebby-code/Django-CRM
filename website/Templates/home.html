@@ -1,16 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="col-md-6 offset-md-3">
+
+
+
   {% if user.is_authenticated %} 
-<h1>Welcome!</h1>
-{% if customer %}
-{% for customer in customers %}
-      {{ customer }}<br/>
-{% endfor %}
+
+
+
+<table class="table table-dark table-striped ">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Address</th>
+      <th scope="col">City</th>
+      <th scope="col">Postcode</th>
+      <th scope="col">Created At</th>
+      <th scope="col">ID</th>
+    </tr>
+    </thead>
+  <tbody>
+  <table class="table table-hover table table-bordered --bs-info-bg-subtle">
+      
+  <tr>
+    {% if customers %}
+    {% for customer in customers %}
+              <tr>
+              <td>{{ customer.first_name }} {{ customer.last_name }} </td>
+              <td>{{ customer.email }}</td>
+              <td> {{ customer.phone }}</td>
+              <td> {{ customer.address }}</td>
+              <td> {{ customer.city }}</td>
+              <td> {{ customer.postcode }}</td>
+              <td> {{ customer.created_at }}</td>
+              <td><a href="{% url 'record' customer.id %}">{{ customer.id }}</td></a>
+
+              </tr>
+          {% endfor %}
+
 {% endif %}
 
+</table> 
+</tbody>
+</table>
+   
+
 {% else %}
+<div class="col-md-6 offset-md-3">
+
 <h1>Login</h1>
 <br/>
 
