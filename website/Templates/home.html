@@ -33,10 +33,9 @@
               <td> {{ customer.city }}</td>
               <td> {{ customer.postcode }}</td>
               <td> {{ customer.created_at }}</td>
-              <td> {{ customer.id }} </td>
-            </tr>
-              
-          {% endfor %}
+              <td><a href="{% url 'record' customer.id %}">{{customer.id}}</a></td>
+            </tr> 
+          {% endfor %}     
 
 {% endif %}
             
