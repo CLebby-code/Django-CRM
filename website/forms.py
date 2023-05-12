@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms 
-from .models import Customer
+from .models import Customer, Company 
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField( widget=forms.TextInput(attrs={'class':'form-control',  'placeholder':'Email Address' }))
@@ -31,7 +31,7 @@ class SignUpForm(UserCreationForm):
         self.fields['password2']
 
     
-class AddRecordForm(forms.ModelForm):
+class AddCustomerForm(forms.ModelForm):
     first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "First Name", "class":"form-control"}), label="")
     last_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Last Name", "class":"form-control"}), label="")
     email = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Email", "class":"form-control"}), label="")
@@ -43,3 +43,16 @@ class AddRecordForm(forms.ModelForm):
     class Meta:
         model = Customer
         exclude = ("user",)
+
+
+class AddCompanyForm(forms.ModelForm):
+    name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Name", "class":"form-control"}), label="")
+    website = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Website", "class":"form-control"}), label="")
+    phone = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Phone", "class":"form-control"}), label="")
+    email = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Email", "class":"form-control"}), label="")
+    industry =forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Industry", "class":"form-control"}), label="")
+
+    class Meta:
+        model = Company
+        exclude = ("organisation",)
+
