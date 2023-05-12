@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% if companys %}
+{%  for companys in company %}
+
+<h1>Company Info</h1>
+<div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+  
+  
+    <div class="card">
+        <div class="card-header">
+        <strong>{{ company_info.name }}</strong> 
+        </div>
+    
+        <div class="card-body">
+    
+            <p class="card-text">
+            <strong>Website: </strong> {{ company_info.website }} 
+            </p>
+    
+            <p class="card-text">
+            <strong>Phone:  </strong> {{ company_info.phone }}
+            </p>
+
+            <p class="card-text">
+            <strong>Email:  </strong> {{ company_info.email }}
+            </p>
+
+            <p class="card-text">
+            <strong>Industry: </strong> {{ company_info.industry }} 
+            </p>
+
+            <p class="card-text">
+            <strong>ID: </strong> {{ company_info.id }} 
+            </p>
+
+
+
+        </div>
+    </div>
+  </div>
+  <br/><br/>
+<a href="{% url 'update_company' company_info %}" class="btn btn-primary btn-sm">Update Company Info</a>
+<a href="{% url 'delete_company' company_info %}" class="btn btn-danger btn-sm">Delete Company</a>
+<a href="{% url 'home' %}" class="btn btn-primary btn-sm">Back</a>
+
+{% endfor %}
+{% endif %}  
+  {% endblock %}
+
+  

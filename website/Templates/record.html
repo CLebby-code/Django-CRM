@@ -36,15 +36,27 @@
         </p>
 
         <p class="card-text">
+        <strong>Company: </strong> {{ company_info.name }}
+        </p>
+
+        <p class="card-text">
         <strong>ID: </strong> {{ customer_record.id }}
         </p>
+        
+       
+
+
+        
 
     </div>
   </div>
 </div>
 <br/><br/>
-<a href="{% url 'update_record' customer_record.id %}" class="btn btn-primary btn-sm">Update Record</a>
-<a href="{% url 'home' %}" class="btn btn-primary btn-sm">Back</a>
-<a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger btn-sm">Delete</a>
 
+
+<a href="{% url 'update_customer' customer_record.id %}" class="btn btn-primary btn-sm">Update Customer Information</a>
+<a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger btn-sm">Delete Customer</a>
+<a href="{% url 'home' %}" class="btn btn-primary btn-sm">Back</a>
 {% endblock %}
+
+
