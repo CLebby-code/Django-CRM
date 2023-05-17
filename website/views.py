@@ -38,6 +38,10 @@ def register_user(request):
                 form = SignUpForm(request.POST)
                 if form.is_valid():
                         form.save()
+                else:
+                    messages.success(request, "That email wasn't valid, please try again with a valid email address")
+                    return redirect('register') 
+
                 #Authenticate and login
                 username= form.cleaned_data['username']
                 password = form.cleaned_data['password1']
