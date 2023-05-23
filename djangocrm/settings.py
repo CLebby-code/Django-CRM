@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -39,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website',
-    
-    
+
+
 ]
 
 MIDDLEWARE = [
@@ -58,7 +57,7 @@ ROOT_URLCONF = 'djangocrm.urls'
 TEMPLATES = [
 {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/"/Users/candacelebby/Projects/DjangoCRM/djangocrm/website/Templates"],
+        'DIRS': ["website/Templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,8 +84,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'violetflowers',
         'USER': 'candacelebby',
-        'PASSWORD': 'catposter',  
-        'HOST': 'localhost',
+        'PASSWORD': 'catposter',
+        'HOST': 'db',
         'PORT':  '5432',
 
     }

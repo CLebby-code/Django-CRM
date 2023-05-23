@@ -1,20 +1,23 @@
 version: '3.9'
 
 services:
-  django:
-    image: django-docker:0.0.1
-    build: .
-    ports:
-      -  "8000-8000"
-    depends_on:
-      - db
-    
-db:
+  db:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_PASSWORD: catposter 
+      POSTGRES_PASSWORD: catposter
       POSTGRES_DB: violetflowers
       POSTGRES_USER: candacelebby
     ports:
      - 5432:5432
+
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - .:/app:cached
+    ports:
+      -  "8000:8000"
+    depends_on:
+      - db
