@@ -3,8 +3,6 @@ name: Code acceptance
 on:
   pull_request:
     types: [opened, reopened]
-    paths:
-      - '*.py'
 
 jobs:
   flake8_py3:
