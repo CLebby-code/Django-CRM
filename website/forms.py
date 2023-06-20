@@ -32,13 +32,13 @@ class SignUpForm(UserCreationForm):
 
     
 class AddCustomerForm(forms.ModelForm):
-    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "First Name", "class":"form-control"}), label="")
-    last_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Last Name", "class":"form-control"}), label="")
-    email = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Email", "class":"form-control"}), label="")
-    phone = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Phone", "class":"form-control"}), label="")
-    address =forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Address", "class":"form-control"}), label="")
-    city = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "City", "class":"form-control"}), label="")
-    postcode = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Postcode", "class":"form-control"}), label="")
+    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "First Name", "class":"form-control"}), min_length=3, max_length=20, label="")
+    last_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Last Name", "class":"form-control"}), min_length=3, max_length=20, label="")
+    email = forms.EmailField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Email", "class":"form-control"}), label="")
+    phone = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Phone", "class":"form-control"}), label="")
+    address =forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Address", "class":"form-control"}), min_length=10, max_length=40,label="")
+    city = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "City", "class":"form-control"}), min_length=5, max_length=10, label="")
+    postcode = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder': "Postcode", "class":"form-control"}), min_length=6, max_length=8,  label="")
 
     class Meta:
         model = Customer
