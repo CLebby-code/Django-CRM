@@ -20,7 +20,7 @@ def home(request):
         else:
             messages.success(
                 request,
-                "This is embarresing... there was a problem logging you in, how about another try?",
+                "This is embarrassing... there was a problem logging you in, how about another try?",
             )
             return redirect("home")
     else:
@@ -83,7 +83,7 @@ def add_customer(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             if form.is_valid():
-                add_customer = form.save()
+                form.save()
                 messages.success(request, "Customer added successfully!")
                 return redirect("home")
         return render(
@@ -154,7 +154,7 @@ def add_company(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             if form.is_valid():
-                add_company = form.save()
+                form.save()
                 messages.success(request, "Company Added Successfully!")
                 return redirect("home")
         return render(request, "add_company.html", {"form": form})
