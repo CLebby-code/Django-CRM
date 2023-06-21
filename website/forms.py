@@ -42,14 +42,19 @@ class SignUpForm(UserCreationForm):
         self.fields["username"]
         self.fields[
             "username"
+<<<<<<< Updated upstream
         ].help_text = '<span class="form-text text-muted"><small>Required.\
               150 characters or fewer.Letters, digits and @/./+/-/_ only.'
+=======
+        ].help_text = '<span class="form-text text-muted"><small>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small></span>'
+>>>>>>> Stashed changes
 
         self.fields["password1"].widget.attrs["class"] = "form-control"
         self.fields["password1"].widget.attrs["placeholder"] = "Password"
         self.fields["password1"]
         self.fields[
             "password1"
+<<<<<<< Updated upstream
         ].help_text = "<ul class=\"form-text text-muted small\"><li>\
         Your password can't be too similar to your other personal information.\
             </li>\
@@ -60,6 +65,12 @@ class SignUpForm(UserCreationForm):
         self.fields["password2"].widget.attrs["class"] = "form-control"
         self.fields["password2"].widget.attrs["placeholder"] =\
             "Confirm Password"
+=======
+        ].help_text = "<ul class=\"form-text text-muted small\"><li>Your password can't be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can't be a commonly used password.</li><li>Your password can't be entirely numeric.</li></ul>"
+
+        self.fields["password2"].widget.attrs["class"] = "form-control"
+        self.fields["password2"].widget.attrs["placeholder"] = "Confirm Password"
+>>>>>>> Stashed changes
         self.fields["password2"]
 
 
