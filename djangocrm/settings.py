@@ -20,12 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-<<<<<<< Updated upstream
-SECRET_KEY = \
-    "django-insecure-9t=q65+h@57y*dvfizo)sc-d_f*quc!d_$@q*jv+$r^a7%x!gt"
-=======
-SECRET_KEY = "django-insecure-9t=q65+h@57y*dvfizo)sc-d_f*quc!d_$@q*jv+$r^a7%x!gt"
->>>>>>> Stashed changes
+SECRET_KEY = "django-insecure-9t=q65+h@57y*dvfizo)sc-d_f*quc!d_$@q*jv+$r^a7%x!gt"  # noqa: E501
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -97,33 +92,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-<<<<<<< Updated upstream
-        "NAME": "django.contrib.auth.password_validation.\
-            UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.\
-            MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.\
-            CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa: E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.\
-            NumericPasswordValidator",
-=======
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
->>>>>>> Stashed changes
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa: E501
     },
 ]
 
