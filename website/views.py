@@ -7,22 +7,25 @@ from .models import Customer, Company
 
 def home(request):
     customers = Customer.objects.all()
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             messages.success(request, "Login successful!")
-            return redirect('home')
+            return redirect("home")
 
         else:
-            messages.success(request, "This is embarresing...\
-            there was a problem logging you in, how about another try?")
-            return redirect('home')
+            messages.success(
+                request,
+                "This is embarresing...\
+            there was a problem logging you in, how about another try?",
+            )
+            return redirect("home")
     else:
-        return render(request, 'home.html', {'customers': customers})
+        return render(request, "home.html", {"customers": customers})
 
 
 def logout_user(request):
@@ -32,32 +35,35 @@ def logout_user(request):
 
 
 def register_user(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             # Authenticate and login
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password1"]
             user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, "Great!\
-                              You have successfully registered!")
-            return redirect('home')
+            messages.success(
+                request,
+                "Great!\
+                              You have successfully registered!",
+            )
+            return redirect("home")
     else:
         form = SignUpForm()
 
-    return render(request, 'register.html', {'form': form})
+    return render(request, "register.html", {"form": form})
 
 
 def customer_record(request, pk):
     if request.user.is_authenticated:
         cust_record = Customer.objects.get(id=pk)
-        return render(request, 'record.html', {'cust_record': cust_record})
+        return render(request, "record.html", {"cust_record": cust_record})
 
     else:
         messages.success(request, "Please log in first!")
-        return redirect('home')
+        return redirect("home")
 
 
 def delete_record(request, pk):
@@ -65,10 +71,10 @@ def delete_record(request, pk):
         delete_customer = Customer.objects.get(id=pk)
         delete_customer.delete()
         messages.success(request, "Customer deleted successfully!")
-        return redirect('home')
+        return redirect("home")
     else:
         messages.success(request, "Please log in first!")
-        return redirect('home')
+        return redirect("home")
 
 
 def add_customer(request):
@@ -79,11 +85,17 @@ def add_customer(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "Customer added successfully!")
-                return redirect('home')
-        return render(request, 'add_customer.html', {'form': form, })
+                return redirect("home")
+        return render(
+            request,
+            "add_customer.html",
+            {
+                "form": form,
+            },
+        )
     else:
         messages.success(request, "Please log in first!")
-        return redirect('home')
+        return redirect("home")
 
 
 def update_cust(request, pk):
@@ -93,20 +105,20 @@ def update_cust(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Customer information updated!")
-            return redirect('home')
-        return render(request, 'update_customer.html', {'form': form})
+            return redirect("home")
+        return render(request, "update_customer.html", {"form": form})
     else:
         messages.success(request, "Please log in first!")
-        return redirect('home')
+        return redirect("home")
 
 
 def company_info(request, pk):
     if request.user.is_authenticated:
         comp_info = Company.objects.get(id=pk)
-        return render(request, 'comp_info.html', {'comp_info': comp_info})
+        return render(request, "comp_info.html", {"comp_info": comp_info})
     else:
         messages.success(request, "Please log in first!")
-        return redirect('home')
+        return redirect("home")
 
 
 def delete_company(request, pk):
@@ -114,10 +126,10 @@ def delete_company(request, pk):
         delete_company = Company.objects.get(id=pk)
         delete_company.delete()
         messages.success(request, "Company deleted successfully!")
-        return redirect('home')
+        return redirect("home")
     else:
         messages.success(request, "Please log in first!")
-        return redirect('home')
+        return redirect("home")
 
 
 def update_company(request, pk):
@@ -128,11 +140,9 @@ def update_company(request, pk):
     if form.is_valid():
         form.save()
         messages.success(request, "Company updated!")
-        return redirect('home')
-        return render(request, 'update_record.html', {'form': form})
+        return redirect("home")
     else:
-        messages.success(request, "Please log in first!")
-        return redirect('home')
+        return render(request, "update_record.html", {"form": form})
 
 
 def add_company(request):
@@ -143,11 +153,11 @@ def add_company(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, "Company Added!")
-                return redirect('home')
-        return render(request, 'add_company.html', {'form': form})
+                return redirect("home")
+        return render(request, "add_company.html", {"form": form})
     else:
         messages.success(request, "Please log in first!")
-        return redirect('home')
+        return redirect("home")
 
 
 # django.db.utils.IntegrityError: insert or update on table "website_customer" violates foreign key constraint "website_customer_company_info_id_e25e786d_fk_website_company_id"  # noqa: E501
