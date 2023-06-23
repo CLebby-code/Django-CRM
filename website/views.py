@@ -1,5 +1,3 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, AddCustomerForm, AddCompanyForm
 from .models import Customer, Company
@@ -98,7 +96,7 @@ def add_customer(request):
         return redirect("home")
 
 
-def update_cust(request, pk):
+def update_customer(request, pk):
     if request.user.is_authenticated:
         current_customer = Customer.objects.get(id=pk)
         form = AddCustomerForm(request.POST or None, instance=current_customer)
