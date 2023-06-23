@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, AddCustomerForm, AddCompanyForm, AddCustNote
+from .forms import SignUpForm, AddCustomerForm, AddCompanyForm
 from .models import Customer, Company
 
 
@@ -20,9 +20,8 @@ def home(request):
         else:
             messages.success(
                 request,
-                "This is embarresing...\
-            there was a problem logging you in, how about another try?",
-            )
+                "This is embarressing... there was a problem logging you in, how about another try?",
+            )  # noqa: E501
             return redirect("home")
     else:
         return render(request, "home.html", {"customers": customers})
@@ -47,13 +46,13 @@ def register_user(request):
             messages.success(
                 request,
                 "Great!\
-                              You have successfully registered!",
+                             You have successfully registered!",
             )
             return redirect("home")
-    else:
-        form = SignUpForm()
+        else:
+            form = SignUpForm()
 
-    return render(request, "register.html", {"form": form})
+        return render(request, "register.html", {"form": form})
 
 
 def customer_record(request, pk):
@@ -158,21 +157,3 @@ def add_company(request):
     else:
         messages.success(request, "Please log in first!")
         return redirect("home")
-
-
-def add_note(request):
-    if request.method == "POST":
-        form = AddCustNote(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Note added!")
-            return render(request, "add_note.html", {"form": form})
-
-
-
-
-
-
-
-# django.db.utils.IntegrityError: insert or update on table "website_customer" violates foreign key constraint "website_customer_company_info_id_e25e786d_fk_website_company_id"  # noqa: E501
-# DETAIL:  Key (company_info_id)=(0) is not present in table "website_company".

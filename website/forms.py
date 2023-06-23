@@ -39,9 +39,9 @@ class SignUpForm(UserCreationForm):
 
         self.fields["username"].widget.attrs["class"] = "form-control"
         self.fields["username"].widget.attrs["placeholder"] = "User Name"
-        self.fields["username"].self.fields[
+        self.fields[
             "username"
-        ].help_text = '<span class="form-text text-muted"><small>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. </small></span>'  # noqa: E501
+        ].help_text = '<span class="form-text text-muted"><small>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small></span>'  # noqa: E501
 
         self.fields["password1"].widget.attrs["class"] = "form-control"
         self.fields["password1"].widget.attrs["placeholder"] = "Password"
@@ -61,6 +61,8 @@ class AddCustomerForm(forms.ModelForm):
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "First Name", "class": "form-control"}
         ),
+        min_length=3,
+        max_length=20,
         label="",
     )
     last_name = forms.CharField(
@@ -68,16 +70,18 @@ class AddCustomerForm(forms.ModelForm):
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Last Name", "class": "form-control"}
         ),
+        min_length=3,
+        max_length=20,
         label="",
     )
-    email = forms.CharField(
+    email = forms.EmailField(
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Email", "class": "form-control"}
         ),
         label="",
     )
-    phone = forms.CharField(
+    phone = forms.IntegerField(
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Phone", "class": "form-control"}
@@ -89,6 +93,8 @@ class AddCustomerForm(forms.ModelForm):
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Address", "class": "form-control"}
         ),
+        min_length=10,
+        max_length=40,
         label="",
     )
     city = forms.CharField(
@@ -96,6 +102,8 @@ class AddCustomerForm(forms.ModelForm):
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "City", "class": "form-control"}
         ),
+        min_length=5,
+        max_length=10,
         label="",
     )
     postcode = forms.CharField(
@@ -103,6 +111,8 @@ class AddCustomerForm(forms.ModelForm):
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Postcode", "class": "form-control"}
         ),
+        min_length=6,
+        max_length=8,
         label="",
     )
 
