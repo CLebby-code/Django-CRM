@@ -39,7 +39,6 @@ class SignUpForm(UserCreationForm):
 
         self.fields["username"].widget.attrs["class"] = "form-control"
         self.fields["username"].widget.attrs["placeholder"] = "User Name"
-        self.fields["username"]
         self.fields[
             "username"
         ].help_text = '<span class="form-text text-muted"><small>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small></span>'  # noqa: E501
@@ -54,7 +53,7 @@ class SignUpForm(UserCreationForm):
         self.fields["password2"].widget.attrs["class"] = "form-control"
         self.fields["password2"].widget.attrs[
             "placeholder"
-        ] = "Confirm Password"  # noqa: E501
+        ] = "Confirm Password"  
         self.fields["password2"]
 
 

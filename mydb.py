@@ -8,11 +8,7 @@ port_id = 5432
 
 try:
     conn = psycopg2.connect(
-        host=hostname,
-        dbname=database,
-        user=username,
-        password=pwd,
-        port=port_id,  # noqa: E501
+        host=hostname, dbname=database, user=username, password=pwd, port=port_id
     )
 
     cur = conn.cursor()

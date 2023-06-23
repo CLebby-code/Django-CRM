@@ -20,8 +20,7 @@ def home(request):
         else:
             messages.success(
                 request,
-                "This is embarressing... there was a problem logging you in, how about another try?",
-            )  # noqa: E501
+                "This is embarressing... there was a problem logging you in, how about another try?",)  # noqa: E501
             return redirect("home")
     else:
         return render(request, "home.html", {"customers": customers})
