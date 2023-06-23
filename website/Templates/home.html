@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<script>
+  $(document).ready(function () {
+      $('.table').DataTable();
+  });
+  
+  </script>
 
   {% if user.is_authenticated %} 
 
