@@ -20,9 +20,8 @@ def home(request):
         else:
             messages.success(
                 request,
-                "This is embarresing...\
-            there was a problem logging you in, how about another try?",
-            )
+                "This is embarressing... there was a problem logging you in, how about another try?",
+            )  # noqa: E501
             return redirect("home")
     else:
         return render(request, "home.html", {"customers": customers})
@@ -47,20 +46,19 @@ def register_user(request):
             messages.success(
                 request,
                 "Great!\
-                              You have successfully registered!",
+                             You have successfully registered!",
             )
             return redirect("home")
-    else:
-        form = SignUpForm()
+        else:
+            form = SignUpForm()
 
-    return render(request, "register.html", {"form": form})
+        return render(request, "register.html", {"form": form})
 
 
 def customer_record(request, pk):
     if request.user.is_authenticated:
         cust_record = Customer.objects.get(id=pk)
         return render(request, "record.html", {"cust_record": cust_record})
-
     else:
         messages.success(request, "Please log in first!")
         return redirect("home")
@@ -158,7 +156,3 @@ def add_company(request):
     else:
         messages.success(request, "Please log in first!")
         return redirect("home")
-
-
-# django.db.utils.IntegrityError: insert or update on table "website_customer" violates foreign key constraint "website_customer_company_info_id_e25e786d_fk_website_company_id"  # noqa: E501
-# DETAIL:  Key (company_info_id)=(0) is not present in table "website_company".
