@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, AddCustomerForm, AddCompanyForm
+from .forms import SignUpForm, AddCustomerForm, AddCompanyForm, AddCustNote
 from .models import Customer, Company
 
 
@@ -58,8 +58,8 @@ def register_user(request):
 
 def customer_record(request, pk):
     if request.user.is_authenticated:
-        cust_record = Customer.objects.get(id=pk)
-        return render(request, "record.html", {"cust_record": cust_record})
+        customer_record = Customer.objects.get(id=pk)
+        return render(request, "record.html", {"customer_record": customer_record})  # noqa: E501
 
     else:
         messages.success(request, "Please log in first!")
@@ -98,7 +98,7 @@ def add_customer(request):
         return redirect("home")
 
 
-def update_cust(request, pk):
+def update_customer(request, pk):
     if request.user.is_authenticated:
         current_customer = Customer.objects.get(id=pk)
         form = AddCustomerForm(request.POST or None, instance=current_customer)
@@ -158,6 +158,20 @@ def add_company(request):
     else:
         messages.success(request, "Please log in first!")
         return redirect("home")
+
+
+def add_note(request):
+    if request.method == "POST":
+        form = AddCustNote(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Note added!")
+            return render(request, "add_note.html", {"form": form})
+
+
+
+
+
 
 
 # django.db.utils.IntegrityError: insert or update on table "website_customer" violates foreign key constraint "website_customer_company_info_id_e25e786d_fk_website_company_id"  # noqa: E501

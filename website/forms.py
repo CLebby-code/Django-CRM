@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Customer, Company
+from .models import Customer, Company, Notes
 
 
 class SignUpForm(UserCreationForm):
@@ -151,3 +151,14 @@ class AddCompanyForm(forms.ModelForm):
     class Meta:
         model = Company
         exclude = ("organisation",)
+
+
+class AddCustNote(forms.ModelForm):
+    add_note = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Add note"}
+        ),
+    )
+
+    
