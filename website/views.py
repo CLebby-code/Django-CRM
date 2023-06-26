@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, AddCustomerForm, AddCompanyForm
-from .models import Customer, Company
+from .forms import SignUpForm, AddCustomerForm, AddCompanyForm, AddCustNote
+from .models import Customer, Company, Notes
 
 
 def home(request):
@@ -58,7 +58,8 @@ def register_user(request):
 def customer_record(request, pk):
     if request.user.is_authenticated:
         customer_record = Customer.objects.get(id=pk)
-        return render(request, "record.html", {"customer_record": customer_record})  # noqa: E501
+        customer_notes = Notes.objects.get
+        return render(request, "record.html", {"customer_record": customer_record, customer_notes: "customer_notes"})  # noqa: E501
 
     else:
         messages.success(request, "Please log in first!")
@@ -157,3 +158,19 @@ def add_company(request):
     else:
         messages.success(request, "Please log in first!")
         return redirect("home")
+
+
+def add_note(request, pk):
+    if request.method == "POST":
+        form = AddCustNote(request.POST)
+        form.save()
+        messages.success(request, "Note added!")
+    if request.user.is_authenticated:
+        customer_notes = Notes.objects.get(id=pk)
+        form = AddCustNote(request.POST or None, instance=customer_notes)
+        return render(request, "add_note.html", {"form": form})
+
+        
+
+    
+    

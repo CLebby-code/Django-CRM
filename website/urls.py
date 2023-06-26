@@ -16,6 +16,6 @@ urlpatterns = [
     path("company_info/<int:pk>", views.company_info, name="company_info"),
     path("update_company/", views.update_company, name="update_company"),
     path("delete_company/", views.delete_company, name="delete_company"),
-    path("add_note/", views.add_note, name="add_note"),
+    path("add_note/<int:pk>", views.add_note, name="add_note"),
 
 ]

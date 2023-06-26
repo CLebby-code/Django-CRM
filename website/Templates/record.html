@@ -68,7 +68,7 @@
   <thead class=>
     <tr>
       <th>Date</th>
-      <th>Note</th>
+      <th>Note</th> {{ customer_note }}
      </tr>
      <th scope="row"></th>
      <td></td>
@@ -84,9 +84,9 @@
     </tr>
    </thead>
 </table>
-    <a href="{% url 'add_note' %}" class="btn btn-primary btn-sm">New note</a>
+    <a href="{% url 'add_note' customer_note.id %}" class="btn btn-primary btn-sm">New note</a>
 
    
-
+    
 
 {% endblock %}
