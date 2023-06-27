@@ -3,20 +3,19 @@
 
 
 <div class="col-md-6 offset-md-3">
+    
     <h2>Add Note</h2>
 
     <br/>
 
-    <form method="POST" action="{% url 'add_note' %}">
+    <form method="POST" action="{% url 'interact' %}">
         {% csrf_token %}
     
     
-        {{form.as_p}}
+        {{form.as_p }}
     
     <br/>
     <button type="submit" class="btn btn-success">Save Note</button>
-    
-
     </div>
     
 

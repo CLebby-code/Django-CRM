@@ -60,33 +60,25 @@
 
 <br/><br/><br/><br/><br/>
 
-
-
-
-
-<table class="table table-bordered border-primary">
-  <thead class=>
+<table class="table table-hover table-bordered">
+  <thead class="table-light">
     <tr>
-      <th>Date</th>
-      <th>Note</th> {{ customer_note }}
-     </tr>
-     <th scope="row"></th>
-     <td></td>
+      <th scope="col">Date</th>
+      <th scope="col">Note</th>
     </tr>
-    <th scope="row"></th>
-     <td></td>
-    </tr>
-    <th scope="row"></th>
-     <td></td>
-    </tr>
-    <th scope="row"></th>
-     <td></td>
-    </tr>
-   </thead>
+  </thead>
+  <tbody>
+<tr>
+  <td>{{ note.created_at }} </td>
+  <td>{{ note.add_note }}</td>
+  
+  </tr>
+</tbody>
 </table>
-    <a href="{% url 'add_note' customer_note.id %}" class="btn btn-primary btn-sm">New note</a>
+
+<a href="{% url 'interact' %}" class="btn btn-primary btn-sm">New note</a>
 
    
-    
+
 
 {% endblock %}

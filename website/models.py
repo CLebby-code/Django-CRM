@@ -29,11 +29,10 @@ class Customer(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 
-class Notes(models.Model):
-    Customer_notes = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
+class Note(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     add_note = models.CharField(max_length=100)
 
 
 def __str__(self):
-    return f"{self.notes}"
+    return f"{self.note}"

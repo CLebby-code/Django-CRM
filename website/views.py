@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, AddCustomerForm, AddCompanyForm, AddCustNote
-from .models import Customer, Company, Notes
+from .models import Customer, Company, Note
 
 
 def home(request):
@@ -58,8 +58,8 @@ def register_user(request):
 def customer_record(request, pk):
     if request.user.is_authenticated:
         customer_record = Customer.objects.get(id=pk)
-        customer_notes = Notes.objects.get
-        return render(request, "record.html", {"customer_record": customer_record, customer_notes: "customer_notes"})  # noqa: E501
+        note_interact = Note.objects.all()
+        return render(request, "record.html", {"customer_record": customer_record, "note_interact": note_interact })  # noqa: E501
 
     else:
         messages.success(request, "Please log in first!")
@@ -148,7 +148,6 @@ def update_company(request, pk):
 def add_company(request):
     if request.user.is_authenticated:
         form = AddCompanyForm(request.POST or None)
-    if request.user.is_authenticated:
         if request.method == "POST":
             if form.is_valid():
                 form.save()
@@ -160,15 +159,19 @@ def add_company(request):
         return redirect("home")
 
 
-def add_note(request, pk):
-    if request.method == "POST":
-        form = AddCustNote(request.POST)
-        form.save()
-        messages.success(request, "Note added!")
+def interact(request):
     if request.user.is_authenticated:
-        customer_notes = Notes.objects.get(id=pk)
-        form = AddCustNote(request.POST or None, instance=customer_notes)
-        return render(request, "add_note.html", {"form": form})
+        form = AddCustNote(request.POST or None)
+        if request.method == "POST":
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Note saved!")
+            return redirect("record" , customer_record) #Trying to redirect back to the record page with unique customer id 
+    return render(request, "interact.html", {"form": form})
+     
+    
+
+    
 
         
 
