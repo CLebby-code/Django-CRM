@@ -32,6 +32,7 @@ class Customer(models.Model):
 class Note(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     add_note = models.CharField(max_length=100)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
 
 
 def __str__(self):

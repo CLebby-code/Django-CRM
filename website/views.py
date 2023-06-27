@@ -58,8 +58,8 @@ def register_user(request):
 @login_required
 def customer_record(request, pk):
     customer_record = Customer.objects.get(id=pk)
-    note_interact = Note.objects.all()
-    return render(request, "record.html", {"customer_record": customer_record, "note_interact": note_interact })  # noqa: E501
+    print(customer_record.note_set.all())
+    return render(request, "record.html", {"customer_record": customer_record})  # noqa: E501
 
 @login_required
 def delete_record(request, pk):
@@ -139,13 +139,21 @@ def add_company(request):
 
 @login_required
 def interact(request):
-    form = AddCustNote(request.POST or None)
+    if request.method == "GET":
+        customer_id = request.GET.get('customer', '')
+        customer = Customer.objects.get(id=customer_id)
+        form = AddCustNote(request.POST or None, initial={"customer": customer})
+        return render(request, "interact.html", {"form": form})
+
     if request.method == "POST":
+        form = AddCustNote(request.POST or None)
         if form.is_valid():
             form.save()
             messages.success(request, "Note saved!")
+            return redirect("/record/%s" % form.cleaned_data["customer"].id)
+        else:
+            return render(request, "interact.html", {"form": form})
 
-    return render(request, "interact.html", {"form": form})
 
 
 

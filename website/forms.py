@@ -170,10 +170,11 @@ class AddCustNote(forms.ModelForm):
             attrs={"class": "form-control", "placeholder": ""}
         ),
     )
-    
+
+    customer = forms.ModelChoiceField(queryset=Customer.objects.all(), widget=forms.HiddenInput)
+
     class Meta:
         model = Note
         fields = "__all__"
-        
 
-    
+
