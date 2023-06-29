@@ -1,34 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
-  
-  
+
+
 <div class="card">
     <div class="card-header">
        <strong>{{ customer_record.first_name }}
-        {{ customer_record.last_name }}</strong> 
+        {{ customer_record.last_name }}</strong>
     </div>
 
     <div class="card-body">
 
         <p class="card-text">
-        <strong>Email: </strong> {{ customer_record.email }} 
+        <strong>Email: </strong> {{ customer_record.email }}
         </p>
 
         <p class="card-text">
         <strong>Phone:  </strong> {{ customer_record.phone }}
         </p>
-    
+
         <p class="card-text">
-        <strong>Address: </strong> {{ customer_record.address }} 
+        <strong>Address: </strong> {{ customer_record.address }}
         </p>
 
         <p class="card-text">
-        <strong>City: </strong> {{ customer_record.city }} 
+        <strong>City: </strong> {{ customer_record.city }}
         </p>
 
         <p class="card-text">
-        <strong>Postcode: </strong> {{ customer_record.postcode }} 
+        <strong>Postcode: </strong> {{ customer_record.postcode }}
         </p>
 
         <p class="card-text">
@@ -42,11 +42,11 @@
         <p class="card-text">
         <strong>ID: </strong> {{ customer_record.id }}
         </p>
-        
-       
 
 
-        
+
+
+
 
     </div>
   </div>
@@ -57,6 +57,30 @@
 <a href="{% url 'update_customer' customer_record.id %}" class="btn btn-primary btn-sm">Update Customer Information</a>
 <a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger btn-sm">Delete Customer</a>
 <a href="{% url 'home' %}" class="btn btn-primary btn-sm">Back</a>
+
+<br/><br/><br/><br/><br/>
+
+<table class="table table-hover table-bordered">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for note in customer_record.note.all %}
+<tr>
+  <td>{{ note.created_at }} </td>
+  <td>{{ note.add_note }}</td>
+
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+
+<a href="{% url 'interact' %}?customer={{ customer_record.id }}" class="btn btn-primary btn-sm">New note</a>
+
+
+
+
 {% endblock %}
-
-
