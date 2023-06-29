@@ -29,10 +29,18 @@ class Migration(migrations.Migration):
                 ),  # noqa: E501
                 ("phone", models.CharField(default="phone", max_length=20)),
                 ("email", models.CharField(default="email", max_length=30)),
+<<<<<<< HEAD
                 (
                     "industry",
                     models.CharField(default="industry", max_length=100),
                 ),  # noqa: E501
+=======
+ add-customer-notes
+                ("industry", models.CharField(default="industry", max_length=100)),  # noqa: E501
+
+                ("industry", models.CharField(default="industry", max_length=100)), 
+ main
+>>>>>>> e8cf1ec4192d573438920d53e1ced77d7572286c
             ],
         ),
         migrations.CreateModel(
