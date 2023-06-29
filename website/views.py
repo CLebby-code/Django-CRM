@@ -146,7 +146,9 @@ def interact(request):
     if request.method == "GET":
         customer_id = request.GET.get("customer", "")
         customer = Customer.objects.get(id=customer_id)
-        form = AddCustNote(request.POST or None, initial={"customer": customer})  # noqa: E501
+        form = AddCustNote(
+            request.POST or None, initial={"customer": customer}
+        )  # noqa: E501
         return render(request, "interact.html", {"form": form})
 
     if request.method == "POST":

@@ -23,10 +23,16 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("name", models.CharField(default="name", max_length=50)),
-                ("website", models.CharField(default="website", max_length=50)),  # noqa: E501
+                (
+                    "website",
+                    models.CharField(default="website", max_length=50),
+                ),  # noqa: E501
                 ("phone", models.CharField(default="phone", max_length=20)),
                 ("email", models.CharField(default="email", max_length=30)),
-                ("industry", models.CharField(default="industry", max_length=100)),  # noqa: E501
+                (
+                    "industry",
+                    models.CharField(default="industry", max_length=100),
+                ),  # noqa: E501
             ],
         ),
         migrations.CreateModel(
