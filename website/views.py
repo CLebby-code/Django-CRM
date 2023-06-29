@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import SignUpForm, AddCustomerForm, AddCompanyForm, AddCustNote
-from .models import Customer, Company, Note
+from .models import Customer, Company
 
 
 def home(request):
@@ -21,7 +21,7 @@ def home(request):
         else:
             messages.success(
                 request,
-                "This is embarressing... there was a problem logging you in, how about another try?",
+                "This is embarressing... there was a problem logging you in, how about another try?",  # noqa: E501
             )  # noqa: E501
             return redirect("home")
     else:
@@ -55,11 +55,14 @@ def register_user(request):
 
         return render(request, "register.html", {"form": form})
 
+
 @login_required
 def customer_record(request, pk):
     customer_record = Customer.objects.get(id=pk)
-    print(customer_record.note_set.all())
-    return render(request, "record.html", {"customer_record": customer_record})  # noqa: E501
+    return render(
+        request, "record.html", {"customer_record": customer_record}
+    )  # noqa: E501
+
 
 @login_required
 def delete_record(request, pk):
@@ -67,6 +70,7 @@ def delete_record(request, pk):
     delete_customer.delete()
     messages.success(request, "Customer deleted successfully!")
     return redirect("home")
+
 
 @login_required
 def add_customer(request):
@@ -140,9 +144,9 @@ def add_company(request):
 @login_required
 def interact(request):
     if request.method == "GET":
-        customer_id = request.GET.get('customer', '')
+        customer_id = request.GET.get("customer", "")
         customer = Customer.objects.get(id=customer_id)
-        form = AddCustNote(request.POST or None, initial={"customer": customer})
+        form = AddCustNote(request.POST or None, initial={"customer": customer})  # noqa: E501
         return render(request, "interact.html", {"form": form})
 
     if request.method == "POST":
@@ -153,13 +157,3 @@ def interact(request):
             return redirect("/record/%s" % form.cleaned_data["customer"].id)
         else:
             return render(request, "interact.html", {"form": form})
-
-
-
-
-
-
-
-
-
-

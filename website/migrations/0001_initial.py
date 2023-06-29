@@ -5,46 +5,82 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Company',
+            name="Company",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(default='name', max_length=50)),
-                ('website', models.CharField(default='website', max_length=50)),
-                ('phone', models.CharField(default='phone', max_length=20)),
-                ('email', models.CharField(default='email', max_length=30)),
-                ('industry', models.CharField(default='industry', max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(default="name", max_length=50)),
+                ("website", models.CharField(default="website", max_length=50)),
+                ("phone", models.CharField(default="phone", max_length=20)),
+                ("email", models.CharField(default="email", max_length=30)),
+                ("industry", models.CharField(default="industry", max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='Customer',
+            name="Customer",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('first_name', models.CharField(max_length=50)),
-                ('last_name', models.CharField(max_length=50)),
-                ('email', models.CharField(max_length=75)),
-                ('phone', models.CharField(max_length=20)),
-                ('address', models.CharField(max_length=100)),
-                ('city', models.CharField(max_length=50)),
-                ('postcode', models.CharField(max_length=10)),
-                ('company', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='website.company')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("first_name", models.CharField(max_length=50)),
+                ("last_name", models.CharField(max_length=50)),
+                ("email", models.CharField(max_length=75)),
+                ("phone", models.CharField(max_length=20)),
+                ("address", models.CharField(max_length=100)),
+                ("city", models.CharField(max_length=50)),
+                ("postcode", models.CharField(max_length=10)),
+                (
+                    "company",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="website.company",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Notes',
+            name="Notes",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('add_note', models.CharField(max_length=100)),
-                ('Customer_notes', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='website.customer')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("add_note", models.CharField(max_length=100)),
+                (
+                    "Customer_notes",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="website.customer",
+                    ),
+                ),
             ],
         ),
     ]

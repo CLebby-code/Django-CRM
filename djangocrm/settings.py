@@ -88,7 +88,7 @@ DATABASES = {
     }
 }
 
-LOGIN_URL = '/'
+LOGIN_URL = "/"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

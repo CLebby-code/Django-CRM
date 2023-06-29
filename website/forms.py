@@ -166,15 +166,13 @@ class AddCompanyForm(forms.ModelForm):
 class AddCustNote(forms.ModelForm):
     add_note = forms.CharField(
         max_length=100,
-        widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": ""}
-        ),
+        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": ""}),
     )
 
-    customer = forms.ModelChoiceField(queryset=Customer.objects.all(), widget=forms.HiddenInput)
+    customer = forms.ModelChoiceField(
+        queryset=Customer.objects.all(), widget=forms.HiddenInput
+    )
 
     class Meta:
         model = Note
         fields = "__all__"
-
-
