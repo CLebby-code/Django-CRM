@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+
+
 <div class="p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
-
-
 <div class="card">
     <div class="card-header">
        <strong>{{ customer_record.first_name }}
@@ -42,12 +42,6 @@
         <p class="card-text">
         <strong>ID: </strong> {{ customer_record.id }}
         </p>
-
-
-
-
-
-
     </div>
   </div>
 </div>
@@ -55,8 +49,39 @@
 
 
 <a href="{% url 'update_customer' customer_record.id %}" class="btn btn-primary btn-sm">Update Customer Information</a>
-<a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger btn-sm">Delete Customer</a>
+
+<a href="{% url 'delete_record' customer_record.id %}"  class="btn btn-danger btn-sm deleteCustomer" data-bs-toggle="modal" data-bs-target="#deleteCustomer{{customer_record.id}}">Delete Customer</a>
+
+
+<script>
+  
+</script>
+
+
+<!-- Delete Customer record modal -->
+<div class="modal fade" id="deleteCustomer{{ customer_record.id }}" tabindex="-1" aria-labelledby="deleteCustomerLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteCustomerLabel">Delete Customer</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete <strong>{{customer_record.first_name}} {{customer_record.last_name}}</strong>? This action cannot be undone. 
+      </div>
+      <div class="modal-footer">
+       <form action="{% url 'delete_record' customer_record.id %}" id="deleteCustomerForm" method="POST">
+        {% csrf_token %} 
+        <button type="button" class="btn btn-danger" id="deleteCustomerButton{{customer_record.id}}" type="submit">Yes, I want to delete</button>
+       </form>    
+      <button type="button" id ="cancelDelete" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <a href="{% url 'home' %}" class="btn btn-primary btn-sm">Back</a>
+
 
 <br/><br/><br/><br/><br/>
 
