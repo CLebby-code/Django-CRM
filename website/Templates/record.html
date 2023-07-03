@@ -53,9 +53,7 @@
 <a href="{% url 'delete_record' customer_record.id %}"  class="btn btn-danger btn-sm deleteCustomer" data-bs-toggle="modal" data-bs-target="#deleteCustomer{{customer_record.id}}">Delete Customer</a>
 
 
-<script>
-  
-</script>
+
 
 
 <!-- Delete Customer record modal -->
@@ -72,7 +70,7 @@
       <div class="modal-footer">
        <form action="{% url 'delete_record' customer_record.id %}" id="deleteCustomerForm" method="POST">
         {% csrf_token %} 
-        <button type="button" class="btn btn-danger" id="deleteCustomerButton{{customer_record.id}}" type="submit">Yes, I want to delete</button>
+        <input type="submit" class="btn btn-danger" id="deleteCustomerButton{{customer_record.id}}" value="Yes, I want to delete"></input>
        </form>    
       <button type="button" id ="cancelDelete" class="btn btn-primary" data-bs-dismiss="modal">No</button>
       </div>
