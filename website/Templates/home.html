@@ -18,24 +18,23 @@
       <th scope="col">Address</th>
       <th scope="col">City</th>
       <th scope="col">Postcode</th>
+      <th scope="col">Company</th>
       <th scope="col">Created At</th>
-      <th scope="col">ID</th>
-      
-    </tr>
+      </tr>
   </thead>
   <tbody>
   
     {% if customers %}
     {% for customer in customers %}
             <tr>
-              <td>{{ customer.first_name }} {{ customer.last_name }} </td>
+              <td><a href="{% url 'record' customer.id %}"> {{ customer.first_name }} {{ customer.last_name }} </a>
               <td>{{ customer.email }}</td>
               <td> {{ customer.phone }}</td>
               <td> {{ customer.address }}</td>
               <td> {{ customer.city }}</td>
               <td> {{ customer.postcode }}</td>
+              <td> {{ customer.company }}</td>
               <td> {{ customer.created_at }}</td>
-              <td><a href="{% url 'record' customer.id %}"> {{ customer.id }}</a>
            </tr>          
      {% endfor %}
      {% endif %}   
