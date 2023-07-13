@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<script>
+    $(document).ready(function () {
+        $('.table-hover').DataTable();
+    });
+    
+    </script>
+
+
+<table class="table table-hover table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Website</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Industry</th>
+      
+      </tr>
+  </thead>
+  <tbody>
+   
+    {%  for company in companys %}
+              <tr>
+                <td>{{ company.name }}</td>
+                <td>{{ company.website }}</td>
+                <td>{{ company.phone }}</td>
+                <td>{{ company.email }}</td>
+                <td>{{ company.industry }}</td>
+             </tr>   
+             {% endfor %}
+             
+  
+  </tbody>
+  </table>
+
+  
+ 
+
+{% endblock %}
