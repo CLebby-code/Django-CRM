@@ -154,3 +154,11 @@ class ViewsTestCase(TestCase):
         response = c.get("/")
         self.assertIn("<table", str(response.content))
         self.assertIn("bob dobalina", str(response.content))
+
+    def test_company_list(self):
+        c = Client()
+        c.login(username="testuser", password="12345")
+        response = c.get("/company_list", follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("<table", str(response.content))
+        self.assertIn("company 1", str(response.content))
