@@ -104,9 +104,10 @@ def update_customer(request, pk):
 
 
 @login_required
-def company_info(request, pk):
-    comp_info = Company.objects.get(id=pk)
-    return render(request, "comp_info.html", {"comp_info": comp_info})
+def company_list(request):
+    companys = Company.objects.all()
+    context = {"companys": companys}
+    return render(request, "company_list.html", context)
 
 
 @login_required
