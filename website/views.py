@@ -113,12 +113,10 @@ def company_list(request):
 @login_required
 def company_details(request, pk):
     company_details = Company.objects.get(id=pk)
-    company_instance = Company.objects.get(id=pk)
-    company_customers = company_instance.customers.all()
+    company_customers = company_details.customers.all()
     context = {
-        "company_instance": company_instance,
-        "company_customers ": company_customers,
         "company_details": company_details,
+        "company_customers ": company_customers,
     }
     return render(request, "company_details.html", context)
 
