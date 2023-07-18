@@ -60,9 +60,7 @@ def register_user(request):
 @login_required
 def customer_record(request, pk):
     customer_record = Customer.objects.get(id=pk)
-    return render(
-        request, "record.html", {"customer_record": customer_record}
-    )
+    return render(request, "record.html", {"customer_record": customer_record})
 
 
 @login_required
