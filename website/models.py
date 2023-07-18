@@ -23,7 +23,9 @@ class Customer(models.Model):
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=50)
     postcode = models.CharField(max_length=10)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
+    company = models.ForeignKey(
+        Company, on_delete=models.CASCADE, null=True, related_name="customers"
+    )
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

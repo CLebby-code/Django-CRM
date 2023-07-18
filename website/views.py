@@ -111,6 +111,19 @@ def company_list(request):
 
 
 @login_required
+def company_details(request, pk):
+    company_details = Company.objects.get(id=pk)
+    company_instance = Company.objects.get(id=pk)
+    company_customers = company_instance.customers.all()
+    context = {
+        "company_instance": company_instance,
+        "company_customers ": company_customers,
+        "company_details": company_details,
+    }
+    return render(request, "company_details.html", context)
+
+
+@login_required
 def delete_company(request, pk):
     delete_company = Company.objects.get(id=pk)
     delete_company.delete()
