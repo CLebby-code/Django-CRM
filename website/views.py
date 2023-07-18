@@ -62,7 +62,7 @@ def customer_record(request, pk):
     customer_record = Customer.objects.get(id=pk)
     return render(
         request, "record.html", {"customer_record": customer_record}
-    )  # noqa: E501
+    )
 
 
 @login_required
