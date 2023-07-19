@@ -44,7 +44,7 @@
     <th scope="col">Name</th>
     </thead>
     <tbody>
-        {% for customer in company_details.customers.all %}
+        {% for customer in company_customers %}
         <tr>
         <td><a href="{% url 'record' customer.id %}">{{ customer.first_name }} {{ customer.last_name }}</a>
         </tr>          

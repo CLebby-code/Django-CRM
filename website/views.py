@@ -114,7 +114,7 @@ def company_details(request, pk):
     company_customers = company_details.customers.all()
     context = {
         "company_details": company_details,
-        "company_customers ": company_customers,
+        "company_customers": company_customers,
     }
     return render(request, "company_details.html", context)
 
