@@ -29,7 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       uses: actions/checkout@v3
-      name: Django CI
       uses: UKnowWhoIm/django-test-action@v0.6
       with:
         settings-dir-path: "djangocrm"
