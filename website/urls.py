@@ -19,8 +19,10 @@ urlpatterns = [
     ),
     path("company_list/", views.company_list, name="company_list"),
     path(
-        "company_details/<int:pk>", views.company_details, name="company_details"
-    ),  # noqa: E501
+        "company_details/<int:pk>",
+        views.company_details,
+        name="company_details",
+    ),
     path("update_company/", views.update_company, name="update_company"),
     # path("delete_company/", views.delete_company, name="delete_company"),
     path("interact/", views.interact, name="interact"),
