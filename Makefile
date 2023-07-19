@@ -7,3 +7,4 @@ lint:
 	-flake8 --exclude=migrations --max-line-length=120 .
 	@echo "\n"
 	-black --check --exclude /migrations/ .
+
