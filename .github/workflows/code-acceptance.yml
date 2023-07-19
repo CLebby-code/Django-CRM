@@ -25,3 +25,23 @@ jobs:
       - uses: psf/black@stable
         with:
           options: "--check --exclude /migrations/"
+  unittests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11]
+
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v3
+      - name: Set up Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      - name: Run Tests
+      run: |
+        python manage.py test
