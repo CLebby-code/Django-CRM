@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card text-white bg-info mb-3">
+  
+  
+    <div class="card">
+        <div class="card-header">
+        <strong>{{ company_details.name }}</strong> 
+        </div>
+    
+        <div class="card-body">
+    
+            <p class="card-text">
+            <strong>Website: </strong> {{ company_details.website }} 
+            </p>
+    
+            <p class="card-text">
+            <strong>Phone:  </strong> {{ company_details.phone }}
+            </p>
+
+            <p class="card-text">
+            <strong>Email:  </strong> {{ company_details.email }}
+            </p>
+
+            <p class="card-text">
+            <strong>Industry: </strong> {{ company_details.industry }} 
+            </p>
+
+            <p class="card-text">
+            <strong>ID: </strong> {{ company_details.id }} 
+            </p>
+        </div>
+    </div>
+  </div>
+  <br/><br/><br/><br/>
+
+<h4>Customers </h4>
+
+
+<table class="table table-hover table-bordered">
+    <thead class="table-dark">
+    <tr>
+    <th scope="col">Name</th>
+    </thead>
+    <tbody>
+        {% for customer in company_customers %}
+        <tr>
+        <td><a href="{% url 'record' customer.id %}">{{ customer.first_name }} {{ customer.last_name }}</a>
+        </tr>          
+        {% endfor %}
+   </tbody>  
+</table>
+
+ {% endblock %}

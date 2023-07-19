@@ -23,7 +23,7 @@
    
     {%  for company in companys %}
               <tr>
-                <td>{{ company.name }}</td>
+                <td><a href="{% url 'company_details' company.id %}">{{ company.name }}</a>
                 <td>{{ company.website }}</td>
                 <td>{{ company.phone }}</td>
                 <td>{{ company.email }}</td>

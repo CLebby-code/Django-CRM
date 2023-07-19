@@ -60,9 +60,7 @@ def register_user(request):
 @login_required
 def customer_record(request, pk):
     customer_record = Customer.objects.get(id=pk)
-    return render(
-        request, "record.html", {"customer_record": customer_record}
-    )  # noqa: E501
+    return render(request, "record.html", {"customer_record": customer_record})
 
 
 @login_required
@@ -108,6 +106,17 @@ def company_list(request):
     companys = Company.objects.all()
     context = {"companys": companys}
     return render(request, "company_list.html", context)
+
+
+@login_required
+def company_details(request, pk):
+    company_details = Company.objects.get(id=pk)
+    company_customers = company_details.customers.all()
+    context = {
+        "company_details": company_details,
+        "company_customers": company_customers,
+    }
+    return render(request, "company_details.html", context)
 
 
 @login_required
