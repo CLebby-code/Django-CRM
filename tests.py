@@ -11,11 +11,7 @@ from website.models import Company, Customer
 class ModelsTestCase(TestCase):
     def setUp(self):
         comp = Company.objects.create(name="company 1")
-        Customer.objects.create(
-            first_name="bob",
-            last_name="dobalina",
-            company=comp
-            )
+        Customer.objects.create(first_name="bob", last_name="dobalina", company=comp)
 
     def test_models_are_sane(self):
         c = Customer.objects.get(first_name="bob", last_name="dobalina")
@@ -25,11 +21,7 @@ class ModelsTestCase(TestCase):
 class ViewsTestCase(TestCase):
     def setUp(self):
         comp = Company.objects.create(name="company 1")
-        Customer.objects.create(
-            first_name="bob",
-            last_name="dobalina",
-            company=comp
-            )
+        Customer.objects.create(first_name="bob", last_name="dobalina", company=comp)
 
         User.objects.create_user(username="testuser", password="12345")
 
@@ -79,11 +71,7 @@ class ViewsTestCase(TestCase):
         c.login(username="testuser", password="12345")
         response = c.get("/")
         comp = Company.objects.get(name="company 1")
-        Customer.objects.get(
-            first_name="bob",
-            last_name="dobalina",
-            company=comp
-            )
+        Customer.objects.get(first_name="bob", last_name="dobalina", company=comp)
         response = c.post(
             "/add_customer/",
             {
@@ -137,10 +125,7 @@ class ViewsTestCase(TestCase):
         c.login(username="testuser", password="12345")
         response = c.get("/")
         cust = Customer.objects.get(first_name="bob", last_name="dobalina")
-        response = c.post(
-            "/interact/",
-            {"add_note": "test note", "customer": cust.id}
-            )
+        response = c.post("/interact/", {"add_note": "test note", "customer": cust.id})
         self.assertEqual(response.status_code, 302)
         response = c.get("/record/%s" % cust.id)
         self.assertIn("test note", str(response.content))
@@ -148,18 +133,12 @@ class ViewsTestCase(TestCase):
     def test_login_success(self):
         c = Client()
         c.login(username="testuser", password="12345")
-        response = c.post(
-            "/home/",
-            {"username": "testuser", "password": "12345"}
-            )
+        response = c.post("/home/", {"username": "testuser", "password": "12345"})
         self.assertEqual(response.status_code, 302)
 
     def test_register_user(self):
         c = Client()
-        response = c.post(
-            "/register/",
-            {"username": "testuser", "password": "12345"}
-            )
+        response = c.post("/register/", {"username": "testuser", "password": "12345"})
         c.login(username="testuser", password="12345")
         response = c.get("/")
         self.assertIn("<table", str(response.content))
@@ -177,11 +156,7 @@ class ViewsTestCase(TestCase):
         c = Client()
         c.login(username="testuser", password="12345")
         comp = Company.objects.get(name="company 1")
-        Customer.objects.get(
-            first_name="bob",
-            last_name="dobalina",
-            company=comp
-            )
+        Customer.objects.get(first_name="bob", last_name="dobalina", company=comp)
         response = c.get("/company_details/%s" % comp.id)
         self.assertIn("bob dobalina", str(response.content))
         self.assertIn("company 1", str(response.content))

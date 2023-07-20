@@ -24,9 +24,6 @@ urlpatterns = [
         name="company_details",
     ),
     path("update_company/", views.update_company, name="update_company"),
-    path("delete_company/<int:pk>",
-         views.delete_company,
-         name="delete_company"
-         ),
+    path("delete_company/<int:pk>", views.delete_company, name="delete_company"),
     path("interact/", views.interact, name="interact"),
 ]
