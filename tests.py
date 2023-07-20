@@ -22,6 +22,7 @@ class ViewsTestCase(TestCase):
     def setUp(self):
         comp = Company.objects.create(name="company 1")
         Customer.objects.create(first_name="bob", last_name="dobalina", company=comp)
+
         User.objects.create_user(username="testuser", password="12345")
 
     def test_customer_list(self):
@@ -159,3 +160,17 @@ class ViewsTestCase(TestCase):
         response = c.get("/company_details/%s" % comp.id)
         self.assertIn("bob dobalina", str(response.content))
         self.assertIn("company 1", str(response.content))
+
+    def test_delete_company(self):
+        c = Client()
+        c.login(username="testuser", password="12345")
+        comp = Company.objects.get(name="company 1")
+        response = c.get("/company_list/")
+        self.assertIn("<table", str(response.content))
+        self.assertIn("company 1", str(response.content))
+        response = c.get("/company_details/%s" % comp.id)
+        c.post("/delete_company/%s" % comp.id)
+        response = c.get("/")
+        response = c.get("/company_list/")
+        self.assertIn("<table", str(response.content))
+        self.assertNotIn("company 1", str(response.content))
