@@ -13,7 +13,8 @@ class ModelsTestCase(TestCase):
         comp = Company.objects.create(name="company 1")
         Customer.objects.create(
             first_name="bob",
-            last_name="dobalina", company=comp
+            last_name="dobalina",
+            company=comp
             )
 
     def test_models_are_sane(self):
@@ -26,7 +27,8 @@ class ViewsTestCase(TestCase):
         comp = Company.objects.create(name="company 1")
         Customer.objects.create(
             first_name="bob",
-            last_name="dobalina", company=comp
+            last_name="dobalina",
+            company=comp
             )
 
         User.objects.create_user(username="testuser", password="12345")
@@ -79,7 +81,8 @@ class ViewsTestCase(TestCase):
         comp = Company.objects.get(name="company 1")
         Customer.objects.get(
             first_name="bob",
-            last_name="dobalina", company=comp
+            last_name="dobalina",
+            company=comp
             )
         response = c.post(
             "/add_customer/",
