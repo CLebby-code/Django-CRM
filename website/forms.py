@@ -125,6 +125,7 @@ class AddCustomerForm(forms.ModelForm):
 
 class AddCompanyForm(forms.ModelForm):
     name = forms.CharField(
+        min_length=3,
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Name", "class": "form-control"}
@@ -132,20 +133,22 @@ class AddCompanyForm(forms.ModelForm):
         label="",
     )
     website = forms.CharField(
+        min_length=9,
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Website", "class": "form-control"}
         ),
         label="",
     )
-    phone = forms.CharField(
+    phone = forms.IntegerField(
+        min_value=11,
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Phone", "class": "form-control"}
         ),
         label="",
     )
-    email = forms.CharField(
+    email = forms.EmailField(
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Email", "class": "form-control"}
@@ -153,6 +156,7 @@ class AddCompanyForm(forms.ModelForm):
         label="",
     )
     industry = forms.CharField(
+        min_length=5,
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Industry", "class": "form-control"}
