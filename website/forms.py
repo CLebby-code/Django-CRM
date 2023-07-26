@@ -158,7 +158,7 @@ class AddCompanyForm(forms.ModelForm):
         label="",
     )
     phone = PhoneNumberField(region="GB")
-    phone.error_messages['invalid'] = 'Please enter a valid mobile or landline number'
+    phone.error_messages["invalid"] = "Please enter a valid mobile or landline number"
 
     class Meta:
         model = Company
