@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from phonenumber_field.formfields import PhoneNumberField
 from .models import Customer, Company, Note
 
 
@@ -125,6 +126,7 @@ class AddCustomerForm(forms.ModelForm):
 
 class AddCompanyForm(forms.ModelForm):
     name = forms.CharField(
+        min_length=3,
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Name", "class": "form-control"}
@@ -132,20 +134,15 @@ class AddCompanyForm(forms.ModelForm):
         label="",
     )
     website = forms.CharField(
+        min_length=9,
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Website", "class": "form-control"}
         ),
         label="",
     )
-    phone = forms.CharField(
-        required=True,
-        widget=forms.widgets.TextInput(
-            attrs={"placeholder": "Phone", "class": "form-control"}
-        ),
-        label="",
-    )
-    email = forms.CharField(
+
+    email = forms.EmailField(
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Email", "class": "form-control"}
@@ -153,12 +150,15 @@ class AddCompanyForm(forms.ModelForm):
         label="",
     )
     industry = forms.CharField(
+        min_length=5,
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Industry", "class": "form-control"}
         ),
         label="",
     )
+    phone = PhoneNumberField(region="GB")
+    phone.error_messages["invalid"] = "Please enter a valid mobile or landline number"
 
     class Meta:
         model = Company

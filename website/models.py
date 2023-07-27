@@ -1,11 +1,13 @@
 from django.db import models
-
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Table with Company information
+
+
 class Company(models.Model):
     name = models.CharField(max_length=50, default="name")
     website = models.CharField(max_length=50, default="website")
-    phone = models.CharField(max_length=20, default="phone")
+    phone = PhoneNumberField(blank=True)
     email = models.CharField(max_length=30, default="email")
     industry = models.CharField(max_length=100, default="industry")
 
