@@ -131,13 +131,12 @@ def delete_company(request, pk):
 def update_company(request, pk):
     current_company = Company.objects.get(id=pk)
     form = AddCompanyForm(request.POST or None, instance=current_company)
-
     if form.is_valid():
         form.save()
         messages.success(request, "Company updated!")
         return redirect("home")
     else:
-        return render(request, "update_record.html", {"form": form})
+        return render(request, "update_company.html", {"form": form})
 
 
 @login_required
