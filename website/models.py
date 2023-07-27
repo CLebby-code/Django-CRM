@@ -1,5 +1,6 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth.models import User
 
 # Table with Company information
 
@@ -38,6 +39,9 @@ class Note(models.Model):
     add_note = models.CharField(max_length=100)
     customer = models.ForeignKey(
         Customer, on_delete=models.CASCADE, null=True, related_name="note"
+    )
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, related_name="note"
     )
 
 

@@ -164,7 +164,9 @@ def interact(request):
     if request.method == "POST":
         form = AddCustNote(request.POST or None)
         if form.is_valid():
-            form.save()
+            note = form.save(commit=False)
+            note.author = request.user
+            note.save()
             messages.success(request, "Note saved!")
             return redirect("/record/%s" % form.cleaned_data["customer"].id)
         else:
