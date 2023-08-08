@@ -23,7 +23,7 @@ urlpatterns = [
         views.company_details,
         name="company_details",
     ),
-    path("update_company/", views.update_company, name="update_company"),
+    path("update_company/<int:pk>", views.update_company, name="update_company"),
     path("delete_company/<int:pk>", views.delete_company, name="delete_company"),
     path("interact/", views.interact, name="interact"),
 ]

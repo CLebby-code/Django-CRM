@@ -174,3 +174,25 @@ class ViewsTestCase(TestCase):
         response = c.get("/company_list/")
         self.assertIn("<table", str(response.content))
         self.assertNotIn("company 1", str(response.content))
+
+    def test_update_company(self):
+        c = Client()
+        c.login(username="testuser", password="12345")
+        response = c.get("/")
+        comp = Company.objects.get(name="company 1")
+        response = c.get("/company_details/%s" % comp.id)
+        response = c.post(
+            "/update_company/%s" % comp.id,
+            {
+                "name": "company 2",
+                "website": "www.company2.co.uk",
+                "phone": "07901342345",
+                "email": "company2@gmail.com",
+                "industry": "gardening",
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        response = c.get("/home/")
+        response = c.get("/company_list/")
+        self.assertIn("<table", str(response.content))
+        self.assertIn("company 2", str(response.content))
