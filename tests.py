@@ -125,10 +125,16 @@ class ViewsTestCase(TestCase):
         c.login(username="testuser", password="12345")
         response = c.get("/")
         cust = Customer.objects.get(first_name="bob", last_name="dobalina")
-        response = c.post("/interact/", {"add_note": "test note", "customer": cust.id})
+        response = c.get("/record/%s" % cust.id)
+        author = User.objects.get(username="testuser")
+        response = c.post(
+            "/interact/",
+            {"add_note": "test note", "customer": cust.id, "author": author.id},
+        )
         self.assertEqual(response.status_code, 302)
         response = c.get("/record/%s" % cust.id)
         self.assertIn("test note", str(response.content))
+        self.assertIn("testuser", str(response.content))
 
     def test_login_success(self):
         c = Client()
