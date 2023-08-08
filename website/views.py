@@ -54,17 +54,17 @@ def register_user(request):
         else:
             form = SignUpForm()
 
-        return render(request, "register.html", {"form": form})
+        return render(request, "register_user.html", {"form": form})
 
 
 @login_required
 def customer_record(request, pk):
     customer_record = Customer.objects.get(id=pk)
-    return render(request, "record.html", {"customer_record": customer_record})
+    return render(request, "customer_record.html", {"customer_record": customer_record})
 
 
 @login_required
-def delete_record(request, pk):
+def delete_customer(request, pk):
     delete_customer = Customer.objects.get(id=pk)
     delete_customer.delete()
     messages.success(request, "Customer deleted successfully!")
@@ -152,14 +152,14 @@ def add_company(request):
 
 
 @login_required
-def interact(request):
+def add_note(request):
     if request.method == "GET":
         customer_id = request.GET.get("customer", "")
         customer = Customer.objects.get(id=customer_id)
         form = AddCustNote(
             request.POST or None, initial={"customer": customer}
         )  # noqa: E501
-        return render(request, "interact.html", {"form": form})
+        return render(request, "add_note.html", {"form": form})
 
     if request.method == "POST":
         form = AddCustNote(request.POST or None)
@@ -168,6 +168,6 @@ def interact(request):
             note.author = request.user
             note.save()
             messages.success(request, "Note saved!")
-            return redirect("/record/%s" % form.cleaned_data["customer"].id)
+            return redirect("/customer_record/%s" % form.cleaned_data["customer"].id)
         else:
-            return render(request, "interact.html", {"form": form})
+            return render(request, "add_note.html", {"form": form})
