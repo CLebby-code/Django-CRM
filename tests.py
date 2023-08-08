@@ -144,7 +144,9 @@ class ViewsTestCase(TestCase):
 
     def test_register_user(self):
         c = Client()
-        response = c.post("/register_user/", {"username": "testuser", "password": "12345"})
+        response = c.post(
+            "/register_user/", {"username": "testuser", "password": "12345"}
+        )
         c.login(username="testuser", password="12345")
         response = c.get("/")
         self.assertIn("<table", str(response.content))
