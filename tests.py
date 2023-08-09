@@ -36,7 +36,7 @@ class ViewsTestCase(TestCase):
         c = Client()
         c.login(username="testuser", password="12345")
         cust = Customer.objects.get(first_name="bob", last_name="dobalina")
-        response = c.get("/record/%s" % cust.id)
+        response = c.get("/customer_record/%s" % cust.id)
         self.assertIn("bob dobalina", str(response.content))
         self.assertIn("Email", str(response.content))
         self.assertIn("Phone", str(response.content))
@@ -47,7 +47,7 @@ class ViewsTestCase(TestCase):
         response = c.get("/")
         cust = Customer.objects.get(first_name="bob", last_name="dobalina")
         comp = Company.objects.get(name="company 1")
-        response = c.get("/record/%s" % cust.id)
+        response = c.get("/customer_record/%s" % cust.id)
         response = c.post(
             "/update_customer/%s" % cust.id,
             {
@@ -97,7 +97,7 @@ class ViewsTestCase(TestCase):
         self.assertIn("<table", str(response.content))
         self.assertIn("bob dobalina", str(response.content))
         cust = Customer.objects.get(first_name="bob", last_name="dobalina")
-        c.post("/delete_record/%s" % cust.id)
+        c.post("/delete_customer/%s" % cust.id)
         response = c.get("/")
         self.assertIn("<table", str(response.content))
         self.assertNotIn("bob dobalina", str(response.content))
@@ -125,14 +125,14 @@ class ViewsTestCase(TestCase):
         c.login(username="testuser", password="12345")
         response = c.get("/")
         cust = Customer.objects.get(first_name="bob", last_name="dobalina")
-        response = c.get("/record/%s" % cust.id)
+        response = c.get("/customer_record/%s" % cust.id)
         author = User.objects.get(username="testuser")
         response = c.post(
-            "/interact/",
+            "/add_note/",
             {"add_note": "test note", "customer": cust.id, "author": author.id},
         )
         self.assertEqual(response.status_code, 302)
-        response = c.get("/record/%s" % cust.id)
+        response = c.get("/customer_record/%s" % cust.id)
         self.assertIn("test note", str(response.content))
         self.assertIn("testuser", str(response.content))
 
@@ -144,7 +144,9 @@ class ViewsTestCase(TestCase):
 
     def test_register_user(self):
         c = Client()
-        response = c.post("/register/", {"username": "testuser", "password": "12345"})
+        response = c.post(
+            "/register_user/", {"username": "testuser", "password": "12345"}
+        )
         c.login(username="testuser", password="12345")
         response = c.get("/")
         self.assertIn("<table", str(response.content))
