@@ -29,6 +29,20 @@ class Customer(models.Model):
     company = models.ForeignKey(
         Company, on_delete=models.CASCADE, null=True, related_name="customers"
     )
+    lead_status_choices = [
+        ("New", "New"),
+        ("Open", "Open"),
+        ("In Progress", "In progress"),
+        ("Open deal", "Open deal"),
+        ("Unqualified", "Unqualified"),
+        ("Attempted to contact", "Attempted to contact"),
+        ("Connected", "Connected"),
+        ("Bad Timing", "Bad timing"),
+        ("Unassigned", "Unassigned"),
+    ]
+    lead_status = models.CharField(
+        max_length=50, choices=lead_status_choices, default="Unassigned"
+    )
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
