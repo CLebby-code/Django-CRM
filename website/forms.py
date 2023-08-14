@@ -134,7 +134,7 @@ class AddCompanyForm(forms.ModelForm):
         label="",
     )
     website = forms.CharField(
-        min_length=9,
+        min_length=10,
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Website", "class": "form-control"}
@@ -150,7 +150,7 @@ class AddCompanyForm(forms.ModelForm):
         label="",
     )
     industry = forms.CharField(
-        min_length=5,
+        min_length=3,
         required=True,
         widget=forms.widgets.TextInput(
             attrs={"placeholder": "Industry", "class": "form-control"}
