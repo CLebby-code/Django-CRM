@@ -7,7 +7,6 @@ from .models import Customer, Company
 
 
 def home(request):
-    customers = Customer.objects.all()
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -25,7 +24,13 @@ def home(request):
             )
             return redirect("home")
     else:
-        return render(request, "home.html", {"customers": customers})
+        return render(request, "home.html")
+
+
+@login_required
+def customer_list(request):
+    customers = Customer.objects.all()
+    return render(request, "customer_list.html", {"customers": customers})
 
 
 def logout_user(request):
