@@ -59,6 +59,7 @@ class ViewsTestCase(TestCase):
                 "city": "london",
                 "postcode": "N1 5QL",
                 "company": comp.id,
+                "lead_status": "New",
             },
         )
         self.assertEqual(response.status_code, 302)
@@ -83,6 +84,7 @@ class ViewsTestCase(TestCase):
                 "city": "london",
                 "postcode": "N1 5QL",
                 "company": comp.id,
+                "lead_status": "New",
             },
         )
         self.assertEqual(response.status_code, 302)
