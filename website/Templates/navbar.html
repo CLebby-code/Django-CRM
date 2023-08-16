@@ -10,9 +10,17 @@
 
         {% if user.is_authenticated %} 
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'company_list' %}">Our Companies</a>
-        </li>
+
+        <div class="dropdown">
+          <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Contacts
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="{% url 'company_list' %}">Our Companies</a></li>
+            <li><a class="dropdown-item" href="{% url 'customer_list' %}">Our Customers</a></li>
+          </ul>
+        </div>
+        
 
         <li class="nav-item">
           <a class="nav-link" href="{% url 'add_customer' %}">Add Customer</a>
