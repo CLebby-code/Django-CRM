@@ -136,7 +136,11 @@ def update_company(request, pk):
         messages.success(request, "Company updated!")
         return redirect("home")
     else:
-        return render(request, "update_company.html", {"form": form})
+        return render(
+            request,
+            "update_company.html",
+            {"form": form, "current_company": current_company},
+        )
 
 
 @login_required

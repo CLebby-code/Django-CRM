@@ -5,15 +5,33 @@
 <br/>
 
 <form method="POST">
+
     {% csrf_token %}
+   
+    <p>
+    <input type="text" name="name" value="{{current_company.name}}" placeholder="name" class="form-control" required id="id_name">
+    </p>
+        
+    <p>
+    <input type="text" name="website" value="{{current_company.website}}" placeholder="website" class="form-control" required id="id_website">
+    </p>
+        
+    <p>
+    <input type="tel" name="phone" value="{{current_company.phone}}" placeholder="phone" class="form-control" required id="id_phone">
+    </p>
+        
+    <p>
+    <input type="text" name="email" value="{{current_company.email}}" placeholder="email" class="form-control" required id="id_email">
+    </p>
+        
+    <p>
+    <input type="text" name="industry" value="{{current_company.industry}}" placeholder="industry" class="form-control"  required id="id_industry">
+    </p>
+        
+    <br/>
+    <button type="submit" class="btn btn-success">Confirm</button>
 
-
-    {{form.as_p}}
-
-<br/>
-<button type="submit" class="btn btn-primary">Update Company</button>
-
-</form>
-</div>
-
-{% endblock %}
+    </form>
+    </div>
+   
+    {% endblock %}

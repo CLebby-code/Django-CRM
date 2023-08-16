@@ -6,12 +6,30 @@
 
 <form method="POST" action="{% url 'add_company' %}">
     {% csrf_token %}
+<p>
+<input type="text" name="name" placeholder="Name" class="form-control" minlength="3" required id="id_name">
+</p>
 
+<p>
+<input type="text" name="website" placeholder="Website" class="form-control" minlength="10" required id="id_website">
+</p>
 
-    {{form.as_p}}
+<p>
+<input type="tel" name="phone" placeholder="Phone" class="form-control" required id="id_phone">
+</p>
+
+<p>
+<input type="text" name="email" placeholder="Email" class="form-control" required id="id_email">
+</p>
+
+<p>
+<input type="text" name="industry" placeholder="Industry" class="form-control" minlength="3" required id="id_industry">
+</p>
 
 <br/>
 <button type="submit" class="btn btn-success">Confirm</button>
+
+</form>
 </div>
 
 {% endblock %}
